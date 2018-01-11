@@ -1,0 +1,37 @@
+{
+  "name": "driveangular",
+  "version": "1.0.0",
+  "description": "Server platform for upload files using MongoDB",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zahariaMarius/driveAngular.git"
+  },
+  "keywords": [
+    "Node",
+    "Angular",
+    "MongoDB",
+    "Drive",
+    "Upload",
+    "File",
+    "RESTful",
+    "API",
+    "TokenBasedAuthentication"
+  ],
+  "author": "Toqir Nasir, Zaharia Laurentiu Jr Marius, Pitero Chiarva, Nicola Borgogno",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/zahariaMarius/driveAngular/issues"
+  },
+  "homepage": "https://github.com/zahariaMarius/driveAngular#readme",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "express": "^4.16.2",
+    "morgan": "^1.9.0",
+    "nodemon": "^1.14.10",
+    "unique-id-generator": "^1.0.1"
+  }
+}
