@@ -3,31 +3,58 @@
  * @type {[modules]}
  */
 const express = require('express');
+
 /**
  * execute express like a function
  * @type {[express]}
  */
 const app = express();
+
 /**
  * constant that takes the morgan modules
  * @type {[modules]}
  */
 const morgan = require('morgan');
+
 /**
  * constant that takes the bodyparse module
  * @type {[modules]}
  */
 const bodyParser = require('body-parser');
+
 /**
  * constant that take the routes
  * @type {[router]}
  */
 const jsonRoutes = require('../api/routes/json');
+
 /**
  * contain the module that handle the error
  * @type {[type]}
  */
 const errorHandling = require('../api/utilities/errorHandling');
+
+/**
+ * contain the MongoDB modules utilities
+ * @type {[type]}
+ */
+const mongoose = require('mongoose');
+
+const mongoDbUrl = 'mongodb://AngularDriveApp:'+
+process.env.MONGO_ATLAS_PW+
+'@drive-shard-00-00-2b6ok.mongodb.net:27017,drive-shard-00-01-2b6ok.mongodb.net:27017,drive-shard-00-02-2b6ok.mongodb.net:27017/test?ssl=true&replicaSet=Drive-shard-0&authSource=admin';
+console.log(mongoDbUrl);
+/**
+ * connect MongoDB to cloud server
+ */
+mongoose.connect(
+  'mongodb://AngularDriveApp:'+
+  'Morning130'+
+  '@drive-shard-00-00-2b6ok.mongodb.net:27017,drive-shard-00-01-2b6ok.mongodb.net:27017,drive-shard-00-02-2b6ok.mongodb.net:27017/test?ssl=true&replicaSet=Drive-shard-0&authSource=admin', {
+  useMongoClient: true
+});
+
+mongoose.Promise = global.Promise;
 
 
 /**

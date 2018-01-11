@@ -31,6 +31,9 @@ const fs = require('fs');
  */
 const errorHandling = require('../utilities/errorHandling');
 
+const mongoose = require('mongoose');
+
+const Json = require('../models/json');
 
 /**** GET  ****/
  //Handle get calls
@@ -55,33 +58,42 @@ router.get('/', (req, res, next) => {
  * get with a specific id
  */
  router.get('/:jsonId', (req, res, next) => {
-     const id = req.params.jsonId;
-     fs.readFile('./data/' + id + '.json', (err, data) => {
-         if (err) {
-             errorHandling.errorType(err, res);
-         } else {
-             errorHandling.checkErrorForGet(data, res, err);
-
-         }
-     });
+    const id = req.params.jsonId;
+    Json.findById(id)
+    .exec()
+    .then(doc => {
+        console.log(doc);
+        res.status(200).json(doc);
+    })
+    .catch(error => {
+        console.log(error);
+        res.status(500).json({errore: error})
+    });
  });
 
  /**** POST ****/
  //Handle post calls
  router.post('/', (req, res, next) => {
     var id = generateID({prefix:"id-"});
-    //the data must have the proper properties
-    const jsonData = {
-        nome: req.body.nome,
-        cognome: req.body.cognome,
-        missioniEffettuate: req.body.missioniEffettuate,
-        missioniDaEffettuare: req.body.missioniDaEffettuare
-    };
 
-    fs.writeFile('./data/jed' + id + '.json', JSON.stringify(jsonData), (err) => {
-        errorHandling.checkErrorForPost(res, err, jsonData, id);
+    const jsonData = new Json({
+        _id: new mongoose.Types.ObjectId(),
+        nome: req.body.nome,
+        cognome: req.body.cognome
     });
 
+    jsonData
+        .save()
+        .then(result => {
+            console.log("ciaooo");
+            console.log(result);
+        })
+        .catch(error => console.log(error));
+
+        res.status(201).json({
+            message: 'handling POST request to /json',
+            createdJson: jsonData,
+        });
 });
 
 /**** PUT ****/
