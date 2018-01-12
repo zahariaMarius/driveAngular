@@ -43,15 +43,18 @@ const Json = require('../models/json');
 //insert '/' because /json is insert in app
 //second method is a handler
 router.get('/', (req, res, next) => {
-    res.header('Content-Type', 'Application/Json');
-    fs.readFile('./data/luke.json', function(err, data) {
-        if (err) {
-            errorHandling.errorType(err,res);
-        }
-        else{
-            errorHandling.checkErrorForGet(data, res, err);
-        }
-    });
+    Json.find()
+        .exec()
+        .then(docs => {
+            console.log(docs);
+            res.status(200).json(doc);
+        })
+        .catch(err => {
+            console.log(err);
+            res.status(500).json({
+                error: err
+            });
+        })
 });
 
 /**
@@ -62,8 +65,12 @@ router.get('/', (req, res, next) => {
     Json.findById(id)
     .exec()
     .then(doc => {
+        if (doc) {
+            res.status(200).json(doc);
+        } else {
+            res.status(404).json({error: "No valid ID found"});
+        }
         console.log(doc);
-        res.status(200).json(doc);
     })
     .catch(error => {
         console.log(error);
