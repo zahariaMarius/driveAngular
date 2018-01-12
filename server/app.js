@@ -40,10 +40,6 @@ const errorHandling = require('../api/utilities/errorHandling');
  */
 const mongoose = require('mongoose');
 
-const mongoDbUrl = 'mongodb://AngularDriveApp:'+
-process.env.MONGO_ATLAS_PW+
-'@drive-shard-00-00-2b6ok.mongodb.net:27017,drive-shard-00-01-2b6ok.mongodb.net:27017,drive-shard-00-02-2b6ok.mongodb.net:27017/test?ssl=true&replicaSet=Drive-shard-0&authSource=admin';
-console.log(mongoDbUrl);
 /**
  * connect MongoDB to cloud server
  */
@@ -53,7 +49,6 @@ mongoose.connect(
   '@drive-shard-00-00-2b6ok.mongodb.net:27017,drive-shard-00-01-2b6ok.mongodb.net:27017,drive-shard-00-02-2b6ok.mongodb.net:27017/test?ssl=true&replicaSet=Drive-shard-0&authSource=admin', {
   useMongoClient: true
 });
-
 mongoose.Promise = global.Promise;
 
 
