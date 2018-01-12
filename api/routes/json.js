@@ -35,13 +35,26 @@ const mongoose = require('mongoose');
 const Json = require('../models/json');
 
 const multer = require('multer');
-const upload = multer({dest: '../api/uploads/'});
+
+const multerStorage = multer.diskStorage({
+    destination: function(req, file, callback) {
+        callback(null, 'api/uploads/');
+    },
+    filename: function(req, file, callback) {
+        callback(null, file.originalname);
+    }
+});
+
+const fileFilter = (req, file, callback) => {
+}
+
+const upload = multer({storage: multerStorage});
 
 router
     .route('/')
     .get((req, res, next) => {
         Json.find()
-            .select('_id nome cognome')
+            .select('_id nome cognome immagine')
             .exec()
             .then(docs => {
                 const response = {
@@ -51,6 +64,7 @@ router
                             _id: doc._id,
                             nome: doc.nome,
                             cognome: doc.cognome,
+                            immagine: doc.immagine,
                             request: {
                                 type: 'GET',
                                 url: 'http://localhost:3000/json/'+doc._id
@@ -76,7 +90,8 @@ router
         const jsonData = new Json({
             _id: new mongoose.Types.ObjectId(),
             nome: req.body.nome,
-            cognome: req.body.cognome
+            cognome: req.body.cognome,
+            immagine: req.file.path
         });
         jsonData
             .save()
@@ -88,6 +103,7 @@ router
                         _id: result._id,
                         nome: result.nome,
                         cognome: result.cognome,
+                        immagine: result.immagine,
                         request: {
                             type: 'POST',
                             url: 'http://localhost:3000/json/'+result._id
@@ -104,7 +120,7 @@ router
     .get((req, res, next) => {
         const id = req.params.jsonID;
         Json.findById(id)
-        .select('_id nome cognome')
+        .select('_id nome cognome immagine')
         .exec()
         .then(doc => {
             console.log(doc);
