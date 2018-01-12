@@ -34,6 +34,9 @@ const mongoose = require('mongoose');
 
 const Json = require('../models/json');
 
+const multer = require('multer');
+const upload = multer({dest: '../api/uploads/'});
+
 router
     .route('/')
     .get((req, res, next) => {
@@ -65,7 +68,10 @@ router
                 });
             })
     })
-    .post((req, res, next) => {
+    .post(upload.single('productImage'), (req, res, next) => {
+
+        console.log(req.file);
+
         var id = generateID({prefix:"id-"});
         const jsonData = new Json({
             _id: new mongoose.Types.ObjectId(),

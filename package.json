@@ -2,10 +2,10 @@
   "name": "driveangular",
   "version": "1.0.0",
   "description": "Server platform for upload files using MongoDB",
-  "main": "index.js",
+  "main": "server/server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon server.js"
+    "start": "nodemon"
   },
   "repository": {
     "type": "git",
@@ -33,6 +33,7 @@
     "express": "^4.16.2",
     "mongoose": "^4.13.9",
     "morgan": "^1.9.0",
+    "multer": "^1.3.0",
     "nodemon": "^1.14.11",
     "unique-id-generator": "^1.0.1"
   }
