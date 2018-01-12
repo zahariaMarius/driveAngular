@@ -65,12 +65,17 @@ router.get('/', (req, res, next) => {
     Json.findById(id)
     .exec()
     .then(doc => {
+<<<<<<< HEAD
+        console.log(doc);
+        res.status(200).json(doc);
+=======
         if (doc) {
             res.status(200).json(doc);
         } else {
             res.status(404).json({error: "No valid ID found"});
         }
         console.log(doc);
+>>>>>>> 951c6b25d2ea3008f4323a785881b83d7857b441
     })
     .catch(error => {
         console.log(error);
