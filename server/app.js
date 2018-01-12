@@ -23,10 +23,16 @@ const morgan = require('morgan');
 const bodyParser = require('body-parser');
 
 /**
- * constant that take the routes
+ * constant that take the json routes
  * @type {[router]}
  */
 const jsonRoutes = require('../api/routes/json');
+
+/**
+ * constant that take the user routes
+ * @type {[router]}
+ */
+const userRoutes = require('../api/routes/user');
 
 /**
  * contain the module that handle the error
@@ -85,6 +91,7 @@ app.use(bodyParser.json());
  */
 // use is a method of express that takes all the request from a user
 app.use('/json', jsonRoutes);
+app.use('/user', userRoutes);
 
 /**
  * handling error
