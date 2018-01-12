@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FileUploader } from 'ng2-file-upload';
 
-// webpack html imports
-let template = require('./file-upload.component.html');
+
 
 
 // const URL = '/api/';
@@ -10,8 +9,7 @@ const URL = 'https://evening-anchorage-3159.herokuapp.com/api/';
 
 @Component({
   selector: 'app-file-upload',
-  //templateUrl: './file-upload.component.html',
-  template: template,
+  templateUrl: './file-upload.component.html',
   styleUrls: ['./file-upload.component.css'],
 })
 export class FileUploadComponent implements OnInit {
