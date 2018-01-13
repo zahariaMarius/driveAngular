@@ -50,10 +50,10 @@ const mongoose = require('mongoose');
  * connect MongoDB to cloud server
  */
 mongoose.connect(
-  'mongodb://AngularDriveApp:'+
-  'Morning130'+
-  '@drive-shard-00-00-2b6ok.mongodb.net:27017,drive-shard-00-01-2b6ok.mongodb.net:27017,drive-shard-00-02-2b6ok.mongodb.net:27017/test?ssl=true&replicaSet=Drive-shard-0&authSource=admin', {
-  useMongoClient: true
+    'mongodb://AngularDriveApp:'+
+    'Morning130'+
+    '@drive-shard-00-00-2b6ok.mongodb.net:27017,drive-shard-00-01-2b6ok.mongodb.net:27017,drive-shard-00-02-2b6ok.mongodb.net:27017/test?ssl=true&replicaSet=Drive-shard-0&authSource=admin', {
+    useMongoClient: true
 });
 mongoose.Promise = global.Promise;
 
@@ -75,14 +75,13 @@ app.use(bodyParser.json());
  * setting header of the app for handling cors error
  */
  app.use((req, res, next) => {
-   res.header("Access-Control-Allow-Origin", "*");
-   res.header(
-     "Access-Control-Allow-Headers",
-     "Origin, X-Requested-With, Content-Type, Accept, Authorization"
-   );
-   if (req.method === 'OPTIONS') {
-       res.header('Access-Control-Allow-Methods', 'PUT, POST, PATCH, DELETE, GET');
-       return res.status(200).json({});
+     res.header('Access-Control-Allow-Origin', '*');
+     res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
+     res.header('X-Powered-By', 'Node.js, Express, MongoDB, Mongoose');
+     res.header('X-Version', '1.0.5');
+     if (req.method === 'OPTIONS') {
+         res.header('Access-Control-Allow-Methods', 'PUT, POST, PATCH, DELETE, GET');
+         return res.status(200).json({});
    }
    next();
  });
@@ -96,11 +95,11 @@ app.use('/user', userRoutes);
 /**
  * handling error
  */
- app.use((req, res, next) => {
-     const error = new Error('Not Found');
-     error.status = 404;
-     errorHandling.errorType(error, res);
- });
+app.use((req, res, next) => {
+    const error = new Error('Not Found');
+    error.status = 404;
+    errorHandling.errorType(error, res);
+});
 
 //export the app
 module.exports = app;
