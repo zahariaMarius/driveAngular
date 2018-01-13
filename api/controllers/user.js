@@ -20,25 +20,27 @@ exports.signup_user = (req, res, next) => {
                 bcrypt.hash(req.body.password, 10, (err, hash) => {
                     if (err) {
                         return res.status(500).json({
-                            error: err
+                            error: 'bcypt hash error',
                         })
                     } else {
                         const user = new User({
                             _id: new mongoose.Types.ObjectId(),
                             email: req.body.email,
-                            password: hash
+                            password: hash,
+                            signupAt: new Date()
                         });
                         user.save()
                             .then(result => {
                                 console.log(result);
                                 res.status(201).json({
-                                    message: 'User succesfully created!'
+                                    message: 'User succesfully created!',
+                                    user: user
                                 })
                             })
                             .catch(err => {
                                 console.log(err);
                                 res.status(500).json({
-                                    error: err
+                                    error: 'user save error'
                                 })
                             });    
                     }
@@ -73,6 +75,7 @@ exports.login_user = (req, res, next) => {
                     const token = jwt.sign({
                         _id: user[0]._id,
                         email: user[0].email,
+                        signupAt: user[0].signupAt
                     }, 'secret', {
                         expiresIn: '1h'
                     });

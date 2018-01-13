@@ -26,7 +26,7 @@ const bodyParser = require('body-parser');
  * constant that take the json routes
  * @type {[router]}
  */
-const jsonRoutes = require('../api/routes/json');
+const documentRoutes = require('../api/routes/document');
 
 /**
  * constant that take the user routes
@@ -50,13 +50,12 @@ const mongoose = require('mongoose');
  * connect MongoDB to cloud server
  */
 mongoose.connect(
-    'mongodb://AngularDriveApp:'+
-    'Morning130'+
-    '@drive-shard-00-00-2b6ok.mongodb.net:27017,drive-shard-00-01-2b6ok.mongodb.net:27017,drive-shard-00-02-2b6ok.mongodb.net:27017/test?ssl=true&replicaSet=Drive-shard-0&authSource=admin', {
+    'mongodb://AngularDrive:'+
+    'Morning.130'+
+    '@angulardrive-shard-00-00-zqkgs.mongodb.net:27017,angulardrive-shard-00-01-zqkgs.mongodb.net:27017,angulardrive-shard-00-02-zqkgs.mongodb.net:27017/test?ssl=true&replicaSet=AngularDrive-shard-0&authSource=admin', {
     useMongoClient: true
 });
 mongoose.Promise = global.Promise;
-
 
 /**
  * morgan permit to log your server error
@@ -89,7 +88,7 @@ app.use(bodyParser.json());
  * only a request with /json will routes
  */
 // use is a method of express that takes all the request from a user
-app.use('/json', jsonRoutes);
+app.use('/documents', documentRoutes);
 app.use('/user', userRoutes);
 
 /**
