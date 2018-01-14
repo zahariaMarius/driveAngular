@@ -4,6 +4,11 @@ const mongoose = require('mongoose');
 const fs = require('fs');
 const User = require('../models/user');
 
+exports.get_signup_view = (req, res, next) => {
+    res.render('../views/signup')
+};
+
+
 /**
  * function that create new user and save it on MongoDB
  * @param {*} req

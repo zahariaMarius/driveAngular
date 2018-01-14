@@ -5,6 +5,7 @@ const checkAuth = require('../middleware/check-auth');
 
 router
     .route('/signup')
+    .get(userController.get_signup_view)
     .post(userController.signup_user);
 
 router
