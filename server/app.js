@@ -63,7 +63,8 @@ mongoose.Promise = global.Promise;
  * dev is the format we choose to output
  */
 app.use(morgan('dev'));
-
+app.set('views', __dirname + '/api/views');
+app.set('view engine', 'pug');
 /**
  * using bodyparser funzionalities
  */
