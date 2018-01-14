@@ -16,7 +16,7 @@ exports.get_signup_view = (req, res, next) => {
  * @param {*} next
  */
 exports.signup_user = (req, res, next) => {
-    User.find({ email: req.body.email }).exec()
+    User.find({ email: req.query.email }).exec()
         .then(user => {
             if (user.length >= 1) {
                 return res.status(409).json({

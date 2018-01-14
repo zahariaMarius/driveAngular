@@ -1,5 +1,21 @@
 extends base.pug
 block content
     h1 Welecome to my RESTful API!
-    form(action="/json", method="post")
-        input(type="submit", value="Save your puggy with a click!")
+    form(action="/user/signup", method="post")
+        div
+            label() name:
+            input(type = "text", name = "name")
+        div
+            label() surname:
+            input(type = "text", name = "surname")
+        div
+            label() email:
+            input(type = "email", name = "email")
+        div        
+            label() password:
+            input(type = "password", name = "password")
+        div        
+            label() repeat password:
+            input(type = "password", name = "repeatPassword")
+        div
+            input(type = "submit", value = "Sign Up")
