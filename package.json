@@ -22,7 +22,7 @@
     "API",
     "TokenBasedAuthentication"
   ],
-  "author": "Toqir Nasir, Zaharia Laurentiu Jr Marius, Pitero Chiarva, Nicola Borgogno",
+  "author": "Toqir Nasir, Zaharia Laurentiu Jr Marius, Pietro Chiarva, Nicola Borgogno",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/zahariaMarius/driveAngular/issues"
