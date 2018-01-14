@@ -105,3 +105,77 @@ exports.login_user = (req, res, next) => {
             })
         })
 };
+
+/**
+ * function that return all user
+ * @param {*} req 
+ * @param {*} res 
+ * @param {*} next 
+ */
+exports.get_user = (req, res, next) => {
+    const id = req.params.user_id;
+    User.find({ _id: id })
+    .exec()
+    .then(result =>  {
+        console.log(result);
+        res.status(200).json({
+            message: 'User succesfully found',
+            user: result[0]
+        })
+    })
+    .catch()
+};
+
+
+/**
+ * function that patch the user data
+ * @param {*} req 
+ * @param {*} res 
+ * @param {*} next 
+ */
+exports.patch_user = (req, res, next) => {
+    const id = req.params.user_id;
+    User.findById(id, (err, user) => {
+        if (err) {
+            console.log(err);
+            res.status(500).json({
+                error: err
+            })
+        } else {
+            user.name = req.body.name || user.name;
+            user.surname = req.body.surname || user.surname;
+            user.email = req.body.email || user.email;
+            if (req.body.password) {
+                bcrypt.hash(req.body.password, 10, (err, hash) => {
+                    if (err) {
+                        res.status(500).json({
+                            error: err
+                        })
+                    } else {
+                        user.password = hash;
+                    }
+                });
+            }
+            user.profileImage = req.body.profileImage || user.profileImage;
+            user.save()
+            .then(result => {
+                console.log(result);
+                res.status(200).json({
+                    message: 'User succesfully updated!',
+                    user: user
+                })
+            })
+            .catch(err => {
+                console.log(err);
+                res.status(500).json({
+                    error: err
+                })
+            })
+        }
+    });
+};
+
+
+exports.delete_user = (req, res, next) => {
+
+};

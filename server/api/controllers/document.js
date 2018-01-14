@@ -15,7 +15,7 @@ exports.get_all_documents = (req, res, next) => {
         .then(results => {
             const response = {
                 count: results.length,
-                json: results.map(result => {
+                documents: results.map(result => {
                     return {
                         _id: result._id,
                         name: result.name,
@@ -83,23 +83,41 @@ exports.upload_new_document = (req, res, next) => {
         });
 };
 
+/**
+ * function that remove all documents from MongoDB and usersDocuments folder
+ * @param {*} req 
+ * @param {*} res 
+ * @param {*} next 
+ */
 exports.delete_all_documents = (req, res, next) => {
-    Documents.remove({ user: req.userData._id})
+    Documents.find({ user: req.userData._id})
     .exec()
-    .then(result => {
-        console.log(result);
-        //fs.unlink()
-        res.status(200).json({
-            message: 'All documents succesfully removed!',
-            result: result
+    .then(documents => {
+        Documents.remove({ user: req.userData._id})
+        .exec()
+        .then(result => {
+            documents.forEach(element => {
+                fs.unlink(element.path, (err) => {
+                    if (err) {
+                        console.log(err);
+                        res.status(500).json({
+                            errore: err
+                        })
+                    }
+                })
+            });
+            res.status(200).json({
+                message: 'All documents succesfully removed!'
+            })
+        })
+        .catch(err => {
+            console.log(err);
+            res.status(500).json({
+                error: err
+            })
         })
     })
-    .catch(err => {
-        console.log(err);
-        res.status(500).json({
-            error: err
-        })
-    })
+    .catch()
 };
 
 /**
