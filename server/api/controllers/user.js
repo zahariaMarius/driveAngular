@@ -18,7 +18,6 @@ exports.signup_user = (req, res, next) => {
                     message: 'User email already exist!'
                 })
             } else {
-
                         const user = new User({
                             _id: new mongoose.Types.ObjectId(),
                             email: req.body.email,
@@ -47,8 +46,6 @@ exports.signup_user = (req, res, next) => {
                                     error: 'user save error'
                                 })
                             });
-
-
             }
         })
         .catch()
@@ -69,8 +66,6 @@ exports.login_user = (req, res, next) => {
                     message: 'Auth failed'
                 })
             }
-
-
                     const token = jwt.sign({
                         _id: user[0]._id,
                         email: user[0].email,
@@ -84,8 +79,6 @@ exports.login_user = (req, res, next) => {
                         user: user[0],
                         token: token
                     })
-
-
 
         })
         .catch(err => {
