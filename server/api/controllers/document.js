@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const fs = require('fs');
 const Documents = require('../models/document');
 
 /**
@@ -8,7 +9,7 @@ const Documents = require('../models/document');
  * @param {*} next 
  */
 exports.get_all_documents = (req, res, next) => {
-    Documents.find()
+    Documents.find({ user: req.userData._id})
         .select('_id name type dimension path uploadedAt user')
         .exec()
         .then(results => {
@@ -82,6 +83,25 @@ exports.upload_new_document = (req, res, next) => {
         });
 };
 
+exports.delete_all_documents = (req, res, next) => {
+    Documents.remove({ user: req.userData._id})
+    .exec()
+    .then(result => {
+        console.log(result);
+        //fs.unlink()
+        res.status(200).json({
+            message: 'All documents succesfully removed!',
+            result: result
+        })
+    })
+    .catch(err => {
+        console.log(err);
+        res.status(500).json({
+            error: err
+        })
+    })
+};
+
 /**
  * function that return the single json required from MOngoDB
  * @param {*} req 
@@ -89,7 +109,7 @@ exports.upload_new_document = (req, res, next) => {
  * @param {*} next 
  */
 exports.get_single_document = (req, res, next) => {
-    const id = req.params.documentID;
+    const id = req.params.document_id;
     Documents.findById(id)
     .select('_id name type dimension path uploadedAt user')
     .exec()
@@ -111,58 +131,46 @@ exports.get_single_document = (req, res, next) => {
     });
  };
 
-
- /**
-  * function that update the single json into MongoDB
-  * @param {*} req 
-  * @param {*} res 
-  * @param {*} next 
-  */
-// exports.patch_single_json = (req, res, next) => {
-//     const id = req.params.jsonID;
-//     const updateOps = {}
-//     for (const ops of req.body) {
-//         updateOps[ops.propName] = ops.value;
-//     }
-//     Documents.update({ _id: id}, {$set: updateOps})
-//         .exec()
-//         .then(result => {
-//             console.log(result);
-//             res.status(200).json({
-//                 message: 'Json succesfully updated!',
-//                 request: {
-//                     type: 'GET',
-//                     url: 'http://localhost:3000/json/'+result._id
-//                 }
-//             });
-//         })
-//         .catch(err => {
-//             console.log(err);
-//             res.status(500).json({
-//                 error: err
-//             })
-//         })
-//  };
-
-
  /**
   * function that delete from MongoDB the json required
   * @param {*} req 
   * @param {*} res 
   * @param {*} next 
   */
-// exports.delete_single_json = (req, res, next) => {
-//     const id = req.params.jsonID;
-//     Documents.remove({ _id: id })
-//         .exec()
-//         .then(result => {
-//             console.log(result);
-//             res.status(200).json({
-//                 message: 'Json succesfully deleted!'
-//             })
-//         })
-//         .catch(err => {
-//             console.log(err);
-//             res.status(500).json({ error: err })
-//         })
-// };
+exports.delete_single_document = (req, res, next) => {
+    const id = req.params.document_id;
+    Documents.findById(id)
+    .exec()
+    .then(document => {
+        console.log(document);
+        if (document) {
+            Documents.remove({ _id: id })
+            .exec()
+            .then(result => {
+                fs.unlink(document.path, (err) => {
+                    if (err) {
+                        console.log(err);
+                        res.status(500).json({
+                            errore: err
+                        })
+                    } else {
+                        res.status(200).json({
+                            message: 'Document succesfully removed!'
+                        })   
+                    }
+                })
+                console.log(result);
+            })
+            .catch(err => {
+                console.log(err);
+                res.status(500).json({ error: err })
+            })
+        } else {
+            res.status(404).json({error: "No valid document _id found"});
+        }
+    })
+    .catch(error => {
+        console.log(error);
+        res.status(500).json({errore: error})
+    });
+};

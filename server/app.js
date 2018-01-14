@@ -26,19 +26,19 @@ const bodyParser = require('body-parser');
  * constant that take the json routes
  * @type {[router]}
  */
-const documentRoutes = require('../api/routes/document');
+const documentRoutes = require('./api/routes/document');
 
 /**
  * constant that take the user routes
  * @type {[router]}
  */
-const userRoutes = require('../api/routes/user');
+const userRoutes = require('./api/routes/user');
 
 /**
  * contain the module that handle the error
  * @type {[type]}
  */
-const errorHandling = require('../api/utilities/errorHandling');
+const errorHandling = require('./api/utilities/errorHandling');
 
 /**
  * contain the MongoDB modules utilities

@@ -1,6 +1,7 @@
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const mongoose = require('mongoose');
+const fs = require('fs');
 const User = require('../models/user');
 
 /**
@@ -31,10 +32,18 @@ exports.signup_user = (req, res, next) => {
                         });
                         user.save()
                             .then(result => {
-                                console.log(result);
-                                res.status(201).json({
-                                    message: 'User succesfully created!',
-                                    user: user
+                                fs.mkdir('server/api/usersDocuments/'+user._id, (err) => {
+                                    if (err) {
+                                        console.log(err);
+                                        res.status(500).json({
+                                            error: err
+                                        })
+                                    } else {
+                                        res.status(201).json({
+                                            message: 'User succesfully created!',
+                                            user: user
+                                        })      
+                                    }
                                 })
                             })
                             .catch(err => {
@@ -82,6 +91,7 @@ exports.login_user = (req, res, next) => {
 
                     return res.status(200).json({
                         message: 'Auth succesfully end',
+                        user: user[0],
                         token: token
                     })
                 }
