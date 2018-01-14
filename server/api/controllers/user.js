@@ -176,6 +176,10 @@ exports.patch_user = (req, res, next) => {
 };
 
 
-exports.delete_user = (req, res, next) => {
-
-};
+/**
+ * function that remove the selected user
+ * @param {*} req 
+ * @param {*} res 
+ * @param {*} next 
+ */
+exports.delete_user = (req, res, next) => {};
