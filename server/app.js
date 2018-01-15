@@ -96,10 +96,10 @@ app.use('/user', userRoutes);
  * handling error
  */
 app.use((req, res, next) => {
-    const error = new Error('Not Found');
-    error.status = 404;
-    errorHandling.errorType(error, res);
-    //res.render('../views/index')
+    // const error = new Error('Not Found');
+    // error.status = 404;
+    // errorHandling.errorType(error, res);
+    res.render('../views/index')
 });
 
 //export the app
