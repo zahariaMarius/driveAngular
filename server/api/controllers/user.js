@@ -23,7 +23,7 @@ exports.get_signup_view = (req, res, next) => {
  * @param {*} next
  */
 exports.signup_user = (req, res, next) => {
-    User.find({ email: req.query.email }).exec()
+    User.find({ email: req.body.email }).exec()
         .then(user => {
             if (user.length >= 1) {
                 const error = new Error();
@@ -32,10 +32,10 @@ exports.signup_user = (req, res, next) => {
             } else {
                         const user = new User({
                             _id: new mongoose.Types.ObjectId(),
-                            name: req.query.name,
-                            surname: req.query.surname,
-                            email: req.query.email,
-                            password: req.query.password,
+                            name: req.body.name,
+                            surname: req.body.surname,
+                            email: req.body.email,
+                            password: req.body.password,
                             signupAt: new Date()
                         });
                         user.save()
@@ -63,6 +63,12 @@ exports.signup_user = (req, res, next) => {
         .catch()
 };
 
+/**
+ * function that render the login.pug view
+ * @param {*} req 
+ * @param {*} res 
+ * @param {*} next 
+ */
 exports.get_login_view = (req, res, next) => {
     res.render('../views/login')
 }
@@ -82,19 +88,25 @@ exports.login_user = (req, res, next) => {
                 error.status = 401;
                 return errorHandling.errorType(error,res);
             }
-                    const token = jwt.sign({
-                        _id: user[0]._id,
-                        email: user[0].email,
-                        signupAt: user[0].signupAt
-                    }, 'secret', {
-                        expiresIn: '1h'
-                    });
+            if (req.body.password == user[0].password) {
+                const token = jwt.sign({
+                    _id: user[0]._id,
+                    email: user[0].email,
+                    signupAt: user[0].signupAt
+                }, 'secret', {
+                    expiresIn: '1h'
+                });
 
-                    return res.status(200).json({
-                        message: 'Auth succesfully end',
-                        user: user[0],
-                        token: token
-                    })
+                return res.status(200).json({
+                    message: 'Auth succesfully end',
+                    user: user[0],
+                    token: token
+                })   
+            } else {
+                return res.status(401).json({
+                    message: 'Auth failed!'
+                })
+            }
 
         })
         .catch(err => {
@@ -142,6 +154,7 @@ exports.patch_user = (req, res, next) => {
             user.name = req.body.name || user.name;
             user.surname = req.body.surname || user.surname;
             user.email = req.body.email || user.email;
+<<<<<<< HEAD
             if (req.body.password) {
                 bcrypt.hash(req.body.password, 10, (err, hash) => {
                     if (err) {
@@ -153,6 +166,9 @@ exports.patch_user = (req, res, next) => {
                     }
                 });
             }
+=======
+            user.password = req.body.password || user.password;
+>>>>>>> 9d22e98250b972ef1a738dc07488299dd56c0c1c
             user.profileImage = req.body.profileImage || user.profileImage;
             user.save()
             .then(result => {
