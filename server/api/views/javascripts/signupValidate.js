@@ -5,12 +5,12 @@ $().ready(function(){
             surname: "required",
             password:{
                 required: true,
-                minlenght: 8
+                minlength: 8
             },
             repeatPassword: {
                 required: true,
-                minlenght: 8,
-                equalTo: "password"
+                minlength: 8,
+                equalTo: "#password"
             },
             email: {
                 required: true,
@@ -22,11 +22,11 @@ $().ready(function(){
             surname: "Please enter your name",
             password:{
                 required: "Please enter a password",
-                minlenght: "Your password must be at least 8 character long"
+                minlength: "Your password must be at least 8 character long"
             },
             repeatPassword: {
                 required: "Please enter a password",
-                minlenght: "Your password must be at least 8 character long",
+                minlength: "Your password must be at least 8 character long",
                 equalTo: "Password doesn't match"
             },
             email: {
