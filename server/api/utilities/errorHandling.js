@@ -90,6 +90,14 @@ module.exports = {
                       }
                   })
               break;
+              case 409:
+                res.status(error.status);
+                res.json({
+                    error: {
+                        message: "User email already exist!"
+                        }
+                    })
+                break;
             case 412:
               res.status(error.status);
               res.json({

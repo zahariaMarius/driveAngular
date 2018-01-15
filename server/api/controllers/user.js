@@ -3,12 +3,13 @@ const jwt = require('jsonwebtoken');
 const mongoose = require('mongoose');
 const fs = require('fs');
 const User = require('../models/user');
+const errorHandling = require('../utilities/errorHandling');
 
 /**
  * function that render the signup.pug view
- * @param {*} req 
- * @param {*} res 
- * @param {*} next 
+ * @param {*} req
+ * @param {*} res
+ * @param {*} next
  */
 exports.get_signup_view = (req, res, next) => {
     res.render('../views/signup')
@@ -25,9 +26,9 @@ exports.signup_user = (req, res, next) => {
     User.find({ email: req.query.email }).exec()
         .then(user => {
             if (user.length >= 1) {
-                return res.status(409).json({
-                    message: 'User email already exist!'
-                })
+                const error = new Error();
+                error.status = 409;
+                return errorHandling.errorType(error,res);
             } else {
                         const user = new User({
                             _id: new mongoose.Types.ObjectId(),
@@ -41,10 +42,9 @@ exports.signup_user = (req, res, next) => {
                             .then(result => {
                                 fs.mkdir('server/api/usersDocuments/'+user._id, (err) => {
                                     if (err) {
-                                        console.log(err);
-                                        res.status(500).json({
-                                            error: err
-                                        })
+                                        const error = new Error();
+                                        error.status = 500;
+                                        errorHandling.errorType(error,res);
                                     } else {
                                         res.status(201).json({
                                             message: 'User succesfully created!',
@@ -54,10 +54,9 @@ exports.signup_user = (req, res, next) => {
                                 })
                             })
                             .catch(err => {
-                                console.log(err);
-                                res.status(500).json({
-                                    error: 'user save error'
-                                })
+                                const error = new Error();
+                                error.status = 500;
+                                errorHandling.errorType(error,res);
                             });
             }
         })
@@ -79,9 +78,9 @@ exports.login_user = (req, res, next) => {
     User.find({ email: req.body.email }).exec()
         .then(user => {
             if (user.length < 1) {
-                return res.status(401).json({
-                    message: 'Auth failed'
-                })
+                const error = new Error();
+                error.status = 401;
+                return errorHandling.errorType(error,res);
             }
                     const token = jwt.sign({
                         _id: user[0]._id,
@@ -99,10 +98,9 @@ exports.login_user = (req, res, next) => {
 
         })
         .catch(err => {
-            console.log(err);
-            res.status(500).json({
-                error: err
-            })
+            const error = new Error();
+            error.status = 500;
+            errorHandling.errorType(error,res);
         })
 };
 
@@ -137,10 +135,9 @@ exports.patch_user = (req, res, next) => {
     const id = req.params.user_id;
     User.findById(id, (err, user) => {
         if (err) {
-            console.log(err);
-            res.status(500).json({
-                error: err
-            })
+            const error = new Error();
+            error.status = 500;
+            errorHandling.errorType(error,res);
         } else {
             user.name = req.body.name || user.name;
             user.surname = req.body.surname || user.surname;
@@ -148,9 +145,9 @@ exports.patch_user = (req, res, next) => {
             if (req.body.password) {
                 bcrypt.hash(req.body.password, 10, (err, hash) => {
                     if (err) {
-                        res.status(500).json({
-                            error: err
-                        })
+                        const error = new Error();
+                        error.status = 500;
+                        errorHandling.errorType(error,res);
                     } else {
                         user.password = hash;
                     }
@@ -166,10 +163,9 @@ exports.patch_user = (req, res, next) => {
                 })
             })
             .catch(err => {
-                console.log(err);
-                res.status(500).json({
-                    error: err
-                })
+                const error = new Error();
+                error.status = 500;
+                errorHandling.errorType(error,res);
             })
         }
     });
