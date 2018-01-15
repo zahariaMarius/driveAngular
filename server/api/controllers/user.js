@@ -65,9 +65,9 @@ exports.signup_user = (req, res, next) => {
 
 /**
  * function that render the login.pug view
- * @param {*} req 
- * @param {*} res 
- * @param {*} next 
+ * @param {*} req
+ * @param {*} res
+ * @param {*} next
  */
 exports.get_login_view = (req, res, next) => {
     res.render('../views/login')
@@ -101,7 +101,7 @@ exports.login_user = (req, res, next) => {
                     message: 'Auth succesfully end',
                     user: user[0],
                     token: token
-                })   
+                })
             } else {
                 return res.status(401).json({
                     message: 'Auth failed!'
@@ -154,21 +154,7 @@ exports.patch_user = (req, res, next) => {
             user.name = req.body.name || user.name;
             user.surname = req.body.surname || user.surname;
             user.email = req.body.email || user.email;
-<<<<<<< HEAD
-            if (req.body.password) {
-                bcrypt.hash(req.body.password, 10, (err, hash) => {
-                    if (err) {
-                        const error = new Error();
-                        error.status = 500;
-                        errorHandling.errorType(error,res);
-                    } else {
-                        user.password = hash;
-                    }
-                });
-            }
-=======
             user.password = req.body.password || user.password;
->>>>>>> 9d22e98250b972ef1a738dc07488299dd56c0c1c
             user.profileImage = req.body.profileImage || user.profileImage;
             user.save()
             .then(result => {
