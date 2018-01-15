@@ -4,6 +4,12 @@ const mongoose = require('mongoose');
 const fs = require('fs');
 const User = require('../models/user');
 
+/**
+ * function that render the signup.pug view
+ * @param {*} req 
+ * @param {*} res 
+ * @param {*} next 
+ */
 exports.get_signup_view = (req, res, next) => {
     res.render('../views/signup')
 };
@@ -57,6 +63,10 @@ exports.signup_user = (req, res, next) => {
         })
         .catch()
 };
+
+exports.get_login_view = (req, res, next) => {
+    res.render('../views/login')
+}
 
 
 /**
