@@ -1,15 +1,18 @@
 extends base.pug
 block content
     h1 Welocme to Angular Drive
-    form(action="/user/login", method="post" id = "form")
-        div
-            label(for="email") EMAIL:
-            input(type="email", name="email")
-        div
-            label(for="password") PASSWORD:
-            input(type="password", name="password")
-        div
-            input(type="submit", value="LOGIN")
-        p OR 
-        p
-            a(href="http://localhost:3000/user/signup") Signup
+    div.container
+        div.formContainer
+            form(action="/user/login", method="post" id = "form")
+                div.formElementContainer
+                    label(for="email") EMAIL:
+                    input(type="email", name="email")
+                div.formElementContainer
+                    label(for="password") PASSWORD:
+                    input(type="password", name="password")
+                div.formElementContainer
+                    input(type="submit", value="LOGIN")
+                div.formElementContainer
+                    p OR
+                    p
+                        a(href="http://localhost:3000/user/signup") Signup

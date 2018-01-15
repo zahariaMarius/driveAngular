@@ -31,3 +31,7 @@ h1 {
     width: 100%;
     font-size: 22px;
 }
+
+.formElementContainer p {
+    text-align: center;
+}
