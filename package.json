@@ -1,6 +1,6 @@
 {
   "name": "driveangular",
-  "version": "1.0.0",
+  "version": "1.0.6",
   "description": "Server platform for upload files using MongoDB",
   "main": "server/server.js",
   "scripts": {

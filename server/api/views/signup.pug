@@ -1,21 +1,23 @@
 extends base.pug
 block content
-    h1 Welecome to my RESTful API!
-    form(action="/user/signup", method="post", id = "signupForm")
-        div
-            label() name:
-            input(type = "text", name = "name", id = "name")
-        div
-            label() surname:
-            input(type = "text", name = "surname", id = "surname")
-        div
-            label() email:
-            input(type = "email", name = "email", id ="email") 
-        div        
-            label() password:
-            input(type = "password", name = "password", id ="password")
-        div        
-            label() repeat password:
-            input(type = "password", name = "repeatPassword", id ="repeatPassword")
-        div
-            input(type="submit", value="Sign Up")
+    h1 Signup to Angular Drive
+    div.container
+        div.formContainer
+            form(action="/user/signup", method="post" id="signupForm")
+                div.formElementContainer
+                    label() NAME:
+                    input(type = "text", name = "name")
+                div.formElementContainer
+                    label() SURNAME:
+                    input(type = "text", name = "surname")
+                div.formElementContainer
+                    label() EMAIL:
+                    input(type = "email", name = "email")
+                div.formElementContainer
+                    label() PASSWORD:
+                    input(type = "password", name = "password")
+                div.formElementContainer        
+                    label() REPEAT PASSWORD:
+                    input(type = "password", name = "repeatPassword")
+                div.formElementContainer
+                    input(type="submit", value="Signup")

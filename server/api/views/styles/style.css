@@ -1,0 +1,33 @@
+h1 {
+    font-size: 50px;
+    text-align: center;
+    padding: 0px;
+    margin: 0px;
+}
+
+.container {
+    text-align: center;
+}
+
+.formContainer {
+    margin-top: 20px;
+    text-align: justify;
+    display: inline-block;
+}
+
+.formElementContainer {
+    padding: 10px;
+}
+
+.formElementContainer label {
+    padding: 10px;
+}
+
+.formElementContainer input {
+    width: 170px;
+}
+
+.formElementContainer input[type=submit] {
+    width: 100%;
+    font-size: 22px;
+}
