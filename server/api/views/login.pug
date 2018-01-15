@@ -1,0 +1,12 @@
+extends base.pug
+block content
+    h1 Login to Angular Drive
+    form(action="/user/login", method="post")
+        div
+            label(for="email") EMAIL:
+            input(type="email", name="email")
+        div
+            label(for="password") PASSWORD:
+            input(type="password", name="password")
+        div
+            input(type="submit", value="LOGIN")

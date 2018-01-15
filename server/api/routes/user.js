@@ -10,6 +10,7 @@ router
 
 router
     .route('/login')
+    .get(userController.get_login_view)
     .post(userController.login_user);
 
 router
