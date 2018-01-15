@@ -26,9 +26,7 @@ exports.signup_user = (req, res, next) => {
     User.find({ email: req.body.email }).exec()
         .then(user => {
             if (user.length >= 1) {
-                const error = new Error();
-                error.status = 409;
-                return errorHandling.errorType(error,res);
+                return errorHandling.errorType(409,res);
             } else {
                         const user = new User({
                             _id: new mongoose.Types.ObjectId(),
@@ -42,9 +40,7 @@ exports.signup_user = (req, res, next) => {
                             .then(result => {
                                 fs.mkdir('server/api/usersDocuments/'+user._id, (err) => {
                                     if (err) {
-                                        const error = new Error();
-                                        error.status = 500;
-                                        errorHandling.errorType(error,res);
+                                        errorHandling.errorType(500,res);
                                     } else {
                                         res.status(201).json({
                                             message: 'User succesfully created!',
@@ -54,9 +50,7 @@ exports.signup_user = (req, res, next) => {
                                 })
                             })
                             .catch(err => {
-                                const error = new Error();
-                                error.status = 500;
-                                errorHandling.errorType(error,res);
+                                errorHandling.errorType(500,res);
                             });
             }
         })
@@ -84,9 +78,7 @@ exports.login_user = (req, res, next) => {
     User.find({ email: req.body.email }).exec()
         .then(user => {
             if (user.length < 1) {
-                const error = new Error();
-                error.status = 401;
-                return errorHandling.errorType(error,res);
+                return errorHandling.errorType(401,res);
             }
             if (req.body.password == user[0].password) {
                 const token = jwt.sign({
@@ -103,16 +95,12 @@ exports.login_user = (req, res, next) => {
                     token: token
                 })
             } else {
-                return res.status(401).json({
-                    message: 'Auth failed!'
-                })
+                return errorHandling.errorType(401,res);
             }
 
         })
         .catch(err => {
-            const error = new Error();
-            error.status = 500;
-            errorHandling.errorType(error,res);
+            errorHandling.errorType(500,res);
         })
 };
 
@@ -147,9 +135,7 @@ exports.patch_user = (req, res, next) => {
     const id = req.params.user_id;
     User.findById(id, (err, user) => {
         if (err) {
-            const error = new Error();
-            error.status = 500;
-            errorHandling.errorType(error,res);
+            errorHandling.errorType(500,res);
         } else {
             user.name = req.body.name || user.name;
             user.surname = req.body.surname || user.surname;
@@ -165,9 +151,7 @@ exports.patch_user = (req, res, next) => {
                 })
             })
             .catch(err => {
-                const error = new Error();
-                error.status = 500;
-                errorHandling.errorType(error,res);
+                errorHandling.errorType(500,res);
             })
         }
     });

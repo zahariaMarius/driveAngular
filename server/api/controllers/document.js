@@ -1,12 +1,13 @@
 const mongoose = require('mongoose');
 const fs = require('fs');
 const Documents = require('../models/document');
+const errorHandling = require('../utilities/errorHandling');
 
 /**
  * function that get all saved json into MOngoDB
- * @param {*} req 
- * @param {*} res 
- * @param {*} next 
+ * @param {*} req
+ * @param {*} res
+ * @param {*} next
  */
 exports.get_all_documents = (req, res, next) => {
     Documents.find({ user: req.userData._id})
@@ -35,10 +36,7 @@ exports.get_all_documents = (req, res, next) => {
             res.status(200).json(response);
         })
         .catch(err => {
-            console.log(err);
-            res.status(500).json({
-                error: err
-            });
+            errorHandling.errorType(500,res);
         })
 };
 
@@ -77,17 +75,15 @@ exports.upload_new_document = (req, res, next) => {
             });
         })
         .catch(error => {
-            res.status(500).json({
-                error: error
-            })
+            errorHandling.errorType(500,res);
         });
 };
 
 /**
  * function that remove all documents from MongoDB and usersDocuments folder
- * @param {*} req 
- * @param {*} res 
- * @param {*} next 
+ * @param {*} req
+ * @param {*} res
+ * @param {*} next
  */
 exports.delete_all_documents = (req, res, next) => {
     Documents.find({ user: req.userData._id})
@@ -99,10 +95,7 @@ exports.delete_all_documents = (req, res, next) => {
             documents.forEach(element => {
                 fs.unlink(element.path, (err) => {
                     if (err) {
-                        console.log(err);
-                        res.status(500).json({
-                            errore: err
-                        })
+                        errorHandling.errorType(500,res);
                     }
                 })
             });
@@ -111,10 +104,7 @@ exports.delete_all_documents = (req, res, next) => {
             })
         })
         .catch(err => {
-            console.log(err);
-            res.status(500).json({
-                error: err
-            })
+            errorHandling.errorType(500,res);
         })
     })
     .catch()
@@ -122,9 +112,9 @@ exports.delete_all_documents = (req, res, next) => {
 
 /**
  * function that return the single json required from MOngoDB
- * @param {*} req 
- * @param {*} res 
- * @param {*} next 
+ * @param {*} req
+ * @param {*} res
+ * @param {*} next
  */
 exports.get_single_document = (req, res, next) => {
     const id = req.params.document_id;
@@ -140,20 +130,19 @@ exports.get_single_document = (req, res, next) => {
                 }
             })
         } else {
-            res.status(404).json({error: "No valid document _id found"});
+            errorHandling.errorType(404,res);
         }
     })
     .catch(error => {
-        console.log(error);
-        res.status(500).json({errore: error})
+        errorHandling.errorType(500,res);
     });
  };
 
  /**
   * function that delete from MongoDB the json required
-  * @param {*} req 
-  * @param {*} res 
-  * @param {*} next 
+  * @param {*} req
+  * @param {*} res
+  * @param {*} next
   */
 exports.delete_single_document = (req, res, next) => {
     const id = req.params.document_id;
@@ -167,28 +156,23 @@ exports.delete_single_document = (req, res, next) => {
             .then(result => {
                 fs.unlink(document.path, (err) => {
                     if (err) {
-                        console.log(err);
-                        res.status(500).json({
-                            errore: err
-                        })
+                        errorHandling.errorType(500,res);
                     } else {
                         res.status(200).json({
                             message: 'Document succesfully removed!'
-                        })   
+                        })
                     }
                 })
                 console.log(result);
             })
             .catch(err => {
-                console.log(err);
-                res.status(500).json({ error: err })
+                errorHandling.errorType(500,res);
             })
         } else {
-            res.status(404).json({error: "No valid document _id found"});
+            errorHandling.errorType(404,res);
         }
     })
     .catch(error => {
-        console.log(error);
-        res.status(500).json({errore: error})
+        errorHandling.errorType(500,res);
     });
 };

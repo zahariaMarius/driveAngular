@@ -8,50 +8,50 @@ module.exports = {
      * @param  {object} res   [the response of the get requet]
      * @param  {object} error [contain the properties of the error]
      */
- errorType : function(error,res){
-    switch(error.status) {
+ errorType : function(status,res){
+    switch(status) {
         case 204:
-          res.status(error.status);
+          res.status(status);
           res.json({
               error: {
                   message: "No Content"
               }
           })
           break;
-    case 301:
-      res.status(error.status);
-      res.json({
-          error: {
-              message: "Moved Permanently"
-          }
-      })
-      break;
-    case 304:
-      res.status(error.status);
-      res.json({
-          error: {
-              message: "Not Modified"
-          }
-      })
-      break;
-      case 307:
-        res.status(error.status);
-        res.json({
-            error: {
-                message: "Temporary Redirect"
-            }
-        })
-        break;
-        case 400:
-          res.status(error.status);
+        case 301:
+          res.status(status);
           res.json({
+              error: {
+                  message: "Moved Permanently"
+              }
+          })
+          break;
+        case 304:
+          res.status(status);
+          res.json({
+              error: {
+                  message: "Not Modified"
+              }
+          })
+          break;
+          case 307:
+            res.status(status);
+            res.json({
+                error: {
+                    message: "Temporary Redirect"
+                }
+          })
+          break;
+          case 400:
+            res.status(status);
+            res.json({
               error: {
                   message: "Bad Request"
                   }
           })
-        break;
+          break;
           case 401:
-            res.status(error.status);
+            res.status(status);
             res.json({
                 error: {
                     message: "Unauthorized"
@@ -59,7 +59,7 @@ module.exports = {
             })
             break;
           case 403:
-            res.status(error.status);
+            res.status(status);
             res.json({
                 error: {
                     message: "Forbidden"
@@ -67,7 +67,7 @@ module.exports = {
               })
             break;
             case 404:
-              res.status(error.status);
+              res.status(status);
               res.json({
                   error: {
                       message: "Not Found"
@@ -75,7 +75,7 @@ module.exports = {
                   })
               break;
             case 405:
-              res.status(error.status);
+              res.status(status);
               res.json({
                   error: {
                       message: "Method not Allowed"
@@ -83,7 +83,7 @@ module.exports = {
                 })
               break;
             case 406:
-              res.status(error.status);
+              res.status(status);
               res.json({
                   error: {
                       message: "Not Acceptable"
@@ -91,7 +91,7 @@ module.exports = {
                   })
               break;
               case 409:
-                res.status(error.status);
+                res.status(status);
                 res.json({
                     error: {
                         message: "User email already exist!"
@@ -99,7 +99,7 @@ module.exports = {
                     })
                 break;
             case 412:
-              res.status(error.status);
+              res.status(status);
               res.json({
                   error: {
                       message: "Precondition Failed"
@@ -107,7 +107,7 @@ module.exports = {
                     })
               break;
             case 415:
-              res.status(error.status);
+              res.status(status);
               res.json({
                   error: {
                       message: "Unsupported Media Type"
