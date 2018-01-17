@@ -27,12 +27,12 @@
     html, body { height: 100%; }
 </style>
 </head>
-<body>
+
 <div class="container">
 
     <div class="navbar navbar-default">
         <div class="navbar-header">
-            <a class="navbar-brand" href>Angular2 File Upload</a>
+            <a class="navbar-brand" href>Angular Drive</a>
         </div>
     </div>
 
@@ -48,14 +48,6 @@
                  [uploader]="uploader"
                  class="well my-drop-zone">
                 Base drop zone
-            </div>
-
-            <div ng2FileDrop
-                 [ngClass]="{'another-file-over-class': hasAnotherDropZoneOver}"
-                 (fileOver)="fileOverAnother($event)"
-                 [uploader]="uploader"
-                 class="well my-drop-zone">
-                Another drop zone
             </div>
 
             Multiple
@@ -134,8 +126,11 @@
             </div>
 
         </div>
-
     </div>
 
-</div>
-</body>
+    <div class= "menu">
+        <ul>
+          <li><a href="#drive">DRIVE</a></li>
+          <li><a href="#profilo">PROFILO</a></li>
+        </ul>
+    </div>
