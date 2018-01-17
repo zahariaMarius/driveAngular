@@ -1,9 +1,9 @@
 extends base.pug
 block content
-    h1 Welocme to Angular Drive
+    h1 Welocome to Angular Drive
     div.container
         div.formContainer
-            form(action="/user/login", method="post" id = "form")
+            form(action="http://localhost:3000/user/login", method="post" id = "form")
                 div.formElementContainer
                     label(for="email") EMAIL:
                     input(type="email", name="email")

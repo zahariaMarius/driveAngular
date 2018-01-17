@@ -89,11 +89,13 @@ exports.login_user = (req, res, next) => {
                     expiresIn: '1h'
                 });
 
-                return res.status(200).json({
-                    message: 'Auth succesfully end',
-                    user: user[0],
-                    token: token
-                })
+                // return res.status(200).json({
+                //     message: 'Auth succesfully end',
+                //     user: user[0],
+                //     token: token
+                // })
+                backURL = req.header('Referer');
+                res.redirect(backURL + '?' + token);
             } else {
                 return errorHandling.errorType(401,res);
             }
