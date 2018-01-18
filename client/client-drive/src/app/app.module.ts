@@ -5,6 +5,7 @@ import { FileUploadModule } from 'ng2-file-upload';
 import { AppComponent } from './app.component';
 import { FileUploadComponent } from './file-upload/file-upload.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
+import { AppRoutingModule } from './/app-routing.module';
 
 
 @NgModule({
@@ -16,7 +17,8 @@ import { UserProfileComponent } from './user-profile/user-profile.component';
   ],
   imports: [
     BrowserModule,
-    FileUploadModule
+    FileUploadModule,
+    AppRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]
