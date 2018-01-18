@@ -8,6 +8,7 @@ module.exports = (req, res, next) => {
         req.userData = decoded;
         next();
     } catch (error) {
-        return errorHandling.errorType(401, res);
+        res.cookie('errorMessage', error.name);
+        //return errorHandling.errorType(401, res);
     }
 };

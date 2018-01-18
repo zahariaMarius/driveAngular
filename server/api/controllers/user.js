@@ -75,9 +75,12 @@ exports.get_login_view = (req, res, next) => {
  * @param {*} next
  */
 exports.login_user = (req, res, next) => {
+    backURL = req.header('Referer');
     User.find({ email: req.body.email }).exec()
         .then(user => {
             if (user.length < 1) {
+                res.cookie('errorMessage', 'Username o Password sbgliata!');
+                res.redirect(backURL);
                 return errorHandling.errorType(401,res);
             }
             if (req.body.password == user[0].password) {
@@ -91,25 +94,20 @@ exports.login_user = (req, res, next) => {
                  const loginData = {
                      "token" : token,
                      "user_id" : user[0]._id
-                 }
-                // return res.status(200).json({
-                //     message: 'Auth succesfully end',
-                //     user: user[0],
-                //     token: token
-                // })
-                // set localStorage with your preferred name, say 'my_token', and the value sent by server
+                }
+                res.clearCookie('errorMessage');
                 res.cookie('userToken', token);
                 res.cookie('user_ID', user[0]._id);
                 res.redirect('http://localhost:4200/heroes');
             } else {
-                res.cookie('errorMessage', "marius è un coglione");
-                backURL = req.header('Referer');
+                res.cookie('errorMessage', "Username o Password sbagliata!");
                 res.redirect(backURL);
             }
 
         })
         .catch(err => {
-            errorHandling.errorType(500,res);
+            res.cookie('errorMessage', "Internal server error!");
+            res.redirect(backURL);
         })
 };
 
