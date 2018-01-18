@@ -5,29 +5,44 @@ import { FileUploader } from 'ng2-file-upload';
 
 
 // const URL = '/api/';
-const URL = 'https://evening-anchorage-3159.herokuapp.com/api/';
+const URL = 'localhost:3000/documents';
 
 @Component({
   selector: 'app-file-upload',
   templateUrl: './file-upload.component.html',
   styleUrls: ['./file-upload.component.css']
 })
-export class FileUploadComponent implements OnInit {
+export class FileUploadComponent {
 
-    public uploader:FileUploader = new FileUploader({url: URL});
-      public hasBaseDropZoneOver:boolean = false;
-      public hasAnotherDropZoneOver:boolean = false;
 
-      public fileOverBase(e:any):void {
-        this.hasBaseDropZoneOver = e;
+  constructor() {this.uploader = new FileUploader({
+      url: URL,
+      disableMultipart: true, // 'DisableMultipart' must be 'true' for formatDataFunction to be called.
+      formatDataFunctionIsAsync: true,
+      formatDataFunction: async (item) => {
+        return new Promise( (resolve, reject) => {
+          resolve({
+            name: item._file.name,
+            length: item._file.size,
+            contentType: item._file.type,
+            date: new Date()
+        });
+        });
       }
+    });
 
-      public fileOverAnother(e:any):void {
-        this.hasAnotherDropZoneOver = e;
-      }
-  constructor() { }
+    this.hasBaseDropZoneOver = false;
+    this.hasAnotherDropZoneOver = false;
 
-  ngOnInit() {
+    this.response = '';
+
+    this.uploader.response.subscribe( res => this.response = res);
+  }
+  public fileOverBase(e:any):void {
+    this.hasBaseDropZoneOver = e;
   }
 
+  public fileOverAnother(e:any):void {
+    this.hasAnotherDropZoneOver = e;
+  }
 }

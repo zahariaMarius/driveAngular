@@ -10,7 +10,7 @@ const checkAuth = require('../middleware/check-auth');
 const multer = require('multer');
 const multerStorage = multer.diskStorage({
     destination: function(req, file, callback) {
-        callback(null, 'server/api/usersDocuments/'+req.userData._id);
+        callback(null, 'server/api/usersDocuments');
     },
     filename: function(req, file, callback) {
         callback(null, file.originalname);
@@ -23,7 +23,7 @@ const documentController = require('../controllers/document');
 router
     .route('/')
     .get(checkAuth, documentController.get_all_documents)
-    .put(checkAuth, upload.single('document'), documentController.upload_new_document)
+    .post(upload.single('document'), documentController.upload_new_document)
     .delete(checkAuth, documentController.delete_all_documents);
 
 router
