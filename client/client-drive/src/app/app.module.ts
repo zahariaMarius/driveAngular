@@ -5,7 +5,6 @@ import { HttpClientModule } from '@angular/common/http';
 import { FileUploadModule } from 'ng2-file-upload';
 
 import { AppComponent } from './app.component';
-import { FileUploadComponent } from './file-upload/file-upload.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { AppRoutingModule } from './/app-routing.module';
 import { LoginComponent } from './login/login.component';
@@ -21,7 +20,6 @@ import { AuthInterceptorService } from './services/auth-interceptor/auth-interce
 @NgModule({
   declarations: [
     AppComponent,
-    FileUploadComponent,
     UserProfileComponent,
     LoginComponent,
     DashboardComponent,
