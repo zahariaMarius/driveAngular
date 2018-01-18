@@ -16,8 +16,12 @@ export class ServerRequestService {
     private messageService: MessageService
   ) { }
 
+  sanitizerView(view) {
+    return this.sanitizer.bypassSecurityTrustHtml(view);
+  }
+
   getIndexView() {
-    return this.http.get('http://localhost:3000/user/login', { responseType: 'text' })
+    return this.http.get('http://localhost:3000', { responseType: 'text' })
       .pipe(
         tap(view => {
             console.log('Login view successfully load!');

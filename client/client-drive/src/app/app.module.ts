@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 import { FileUploadModule } from 'ng2-file-upload';
 
 import { AppComponent } from './app.component';
@@ -11,6 +12,7 @@ import { LoginComponent } from './login/login.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { MessageComponent } from './message/message.component';
 
+import { CookieService } from 'ngx-cookie-service';
 import { MessageService } from './services/message/message.service';
 import { CheckCookieService } from './services/check-cookie/check-cookie.service';
 import { ServerRequestService } from './services/server-request/server-request.service';
@@ -30,10 +32,12 @@ import { AuthInterceptorService } from './services/auth-interceptor/auth-interce
     BrowserModule,
     FormsModule,
     FileUploadModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule
   ],
 
   providers: [
+    CookieService,
     MessageService,
     CheckCookieService,
     ServerRequestService,
