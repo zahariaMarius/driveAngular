@@ -94,8 +94,11 @@ exports.login_user = (req, res, next) => {
                 //     user: user[0],
                 //     token: token
                 // })
+                // set localStorage with your preferred name, say 'my_token', and the value sent by server
+                res.cookie('userToken', token, { httpOnly: true });
+                 console.log('cookie created successfully');
                 backURL = req.header('Referer');
-                res.redirect(backURL + '?' + token);
+                res.redirect(backURL);
             } else {
                 return errorHandling.errorType(401,res);
             }
