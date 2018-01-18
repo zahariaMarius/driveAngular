@@ -21,3 +21,14 @@ li a {
 li a:hover {
     background-color: #111111;
 }
+.profilo {
+    background-image: './images/user.png';*/
+    background-repeat: no-repeat;
+    background-position: 50% 10px;
+}
+
+.drive {
+    background-image: './images/upload.png';*/
+    background-repeat: no-repeat;
+    background-position: 50% 10px;
+}
