@@ -27,19 +27,14 @@ export class UserProfileComponent implements OnInit {
       this.showEdit = true;
  }
 
+ // tslint:disable-next-line:use-life-cycle-interface
+ ngAfterViewInit() {
+  this.elementRef.nativeElement.querySelector('#edit').addEventListener('click', this.onClick.bind(this));
+}
 
-
-
-  ngOnInit() {
-    //this.getUserInformation();
-    this.getUserInformation();
-    this.showErrorMessage();
-  }
-
-  ngAfterViewInit() {
-  this.elementRef.nativeElement.querySelector('#edit')
-                                .addEventListener('click', this.onClick.bind(this));
-
+ngOnInit() {
+  this.getUserInformation();
+  this.showErrorMessage();
 }
 
 onClick(event) {
