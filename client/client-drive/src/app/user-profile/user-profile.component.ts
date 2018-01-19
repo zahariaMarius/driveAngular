@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router} from '@angular/router';
 import { ServerRequestService } from '../services/server-request/server-request.service';
 import { CheckCookieService } from '../services/check-cookie/check-cookie.service';
 import { log } from 'util';
@@ -11,15 +12,16 @@ import { AfterViewInit, ElementRef} from '@angular/core';
 })
 export class UserProfileComponent implements OnInit {
 
-    showSelected : boolean;
+    showSelected: boolean;
     showEdit: boolean;
     user: any;
     body: {};
 
   constructor(
+    private router: Router,
     private serverRequestService: ServerRequestService,
     private checkCookieService: CheckCookieService,
-    private elementRef:ElementRef
+    private elementRef: ElementRef
   ) {
       this.showSelected = false;
       this.showEdit = true;
@@ -45,7 +47,7 @@ onClick(event) {
    this.showEdit = false;
 }
 
-saveData(Name: string, Surname: string, Email: string, Password: string){
+saveData(Name: string, Surname: string, Email: string, Password: string) {
 
       this.body = {
       'name': Name,
@@ -80,8 +82,12 @@ saveData(Name: string, Surname: string, Email: string, Password: string){
     );
   }
 
+  userLogout() {
+    this.checkCookieService.deleteUserToken();
+    this.router.navigate(['/login']);
+  }
+
   showErrorMessage() {
     this.checkCookieService.checkIfErrorMessageCookieExist();
   }
-
 }

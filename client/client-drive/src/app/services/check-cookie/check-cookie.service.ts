@@ -29,4 +29,8 @@ export class CheckCookieService {
     return this.token;
   }
 
+  deleteUserToken() {
+    this.cookieService.delete('userToken');
+  }
+
 }

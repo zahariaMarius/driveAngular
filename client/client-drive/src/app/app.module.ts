@@ -46,7 +46,8 @@ import { AuthGuardService } from './services/auth-guard/auth-guard.service';
       useClass: AuthInterceptorService,
       multi: true
     },
-    AuthInterceptorService
+    AuthInterceptorService,
+    AuthGuardService
   ],
 
   bootstrap: [

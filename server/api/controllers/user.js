@@ -42,10 +42,7 @@ exports.signup_user = (req, res, next) => {
                                     if (err) {
                                         errorHandling.errorType(500,res);
                                     } else {
-                                        res.status(201).json({
-                                            message: 'User succesfully created!',
-                                            user: user
-                                        })
+                                        res.redirect('http://localhost:4200/login');
                                     }
                                 })
                             })
