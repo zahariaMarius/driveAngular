@@ -1,6 +1,4 @@
 
-<h1 *ngIf="user">{{ user.user.name }}</h1>
-
     <head>
         <meta charset="utf-8">
         <title>User Profile</title>
@@ -12,41 +10,53 @@
         <div class="container">
     <div class="row">
       <div class="col-25">
-        <label for="fname">First Name</label>
+          <label> Username: </label>
+        <label *ngIf="user">{{ user.user.name }}</label>
       </div>
       <div class="col-75">
-        <input type="text" id="fname" name="firstname" placeholder="Your name..">
+        <input #fname  *ngIf="showSelected" [(ngModel)]="name"
+        type="text" id="fname" name="firstname" placeholder="Your name..">
       </div>
     </div>
     <div class="row">
       <div class="col-25">
-        <label for="lname">Last Name</label>
+          <label> Surname: </label>
+        <label *ngIf="user">{{ user.user.surname }}</label>
       </div>
       <div class="col-75">
-        <input type="text" id="lname" name="lastname" placeholder="Your last name..">
+        <input #lname *ngIf="showSelected" [(ngModel)]="surname"
+        type="text" id="lname" name="lastname" placeholder="Your last name..">
       </div>
     </div>
     <div class="row">
       <div class="col-25">
-        <label for="email">E-Mail</label>
+          <label> E-Mail: </label>
+        <label *ngIf="user">{{ user.user.email }}</label>
       </div>
       <div class="col-75">
-        <input type="text" id="email" name="email" placeholder="E-mail">
+        <input #email *ngIf="showSelected" [(ngModel)]="Email"
+         type="text" id="email" name="email" placeholder="E-mail">
       </div>
     </div>
     <div class="row">
       <div class="col-25">
-        <label for="password">Password</label>
+          <label> Password: </label>
+        <label *ngIf="user">{{ user.user.password }}</label>
       </div>
       <div class="col-75">
-        <input type="text" id="password" name="password" placeholder="Password">
+        <input  #password *ngIf="showSelected" [(ngModel)]="pswd"
+        type="text" id="password" name="password" placeholder="Password">
       </div>
     </div>
     <div class="row">
-     <input type="submit" value="Edit your profile">
+     <input *ngIf="showEdit"
+      type="submit" value="Edit your profile" id="edit">
    </div>
     <div class="row">
-        <div class="saveDate">
-     <input type="submit" value="Save">
+        <div *ngIf="showSelected">
+     <button type="submit" id="save"
+     (click) = "saveData(name, surname, Email, pswd)">
+     Save
+     </button>
          </div>
    </div>
