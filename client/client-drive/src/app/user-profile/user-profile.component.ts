@@ -63,7 +63,10 @@ saveData(Name: string, Surname: string, Email: string, Password: string){
        window.location.reload();
 
 }
-
+logOut()
+{
+    //funzione di logout
+}
   getUserInformation() {
     this.serverRequestService.getUser().subscribe(
       user => {
