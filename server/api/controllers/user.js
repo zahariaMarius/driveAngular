@@ -124,7 +124,6 @@ exports.get_user = (req, res, next) => {
     .then(result =>  {
         console.log(result);
         res.status(200).json({
-            message: 'User succesfully found',
             user: result[0]
         })
     })
@@ -142,7 +141,8 @@ exports.patch_user = (req, res, next) => {
     const id = req.params.user_id;
     User.findById(id, (err, user) => {
         if (err) {
-            errorHandling.errorType(500,res);
+            res.cookie('errorMessage', "Internal server error!");
+            //errorHandling.errorType(500,res);
         } else {
             user.name = req.body.name || user.name;
             user.surname = req.body.surname || user.surname;
@@ -152,13 +152,15 @@ exports.patch_user = (req, res, next) => {
             user.save()
             .then(result => {
                 console.log(result);
+                res.clearCookie('errorMessage');
                 res.status(200).json({
                     message: 'User succesfully updated!',
                     user: user
                 })
             })
             .catch(err => {
-                errorHandling.errorType(500,res);
+                res.cookie('errorMessage', "Internal server error!");
+                //errorHandling.errorType(500,res);
             })
         }
     });

@@ -54,6 +54,17 @@ export class ServerRequestService {
     );
   }
 
+  updateUser(body) {
+    const user_id = this.checkCookieSeervice.getUserId();
+    return this.http.patch('http://localhost:3000/user/' + user_id, body)
+    .pipe(
+      tap(response => {
+        console.log(response);
+      }),
+      catchError(this.handleError('updateUser', ''))
+    );
+  }
+
 
   /**
  * Handle Http operation that failed.

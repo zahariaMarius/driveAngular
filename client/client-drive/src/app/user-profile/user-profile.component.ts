@@ -11,14 +11,19 @@ import { log } from 'util';
 export class UserProfileComponent implements OnInit {
 
   user: any;
+  body = {
+    'name': 'Angular'
+  };
 
   constructor(
     private serverRequestService: ServerRequestService,
-    private cookie: CheckCookieService
+    private checkCookieService: CheckCookieService
   ) { }
 
   ngOnInit() {
+    //this.getUserInformation();
     this.getUserInformation();
+    this.showErrorMessage();
   }
 
   getUserInformation() {
@@ -27,6 +32,18 @@ export class UserProfileComponent implements OnInit {
         this.user = user;
       }
     );
+  }
+
+  updateUserProfile() {
+    this.serverRequestService.updateUser(this.body).subscribe(
+      response => {
+        console.log(response);
+      }
+    );
+  }
+
+  showErrorMessage() {
+    this.checkCookieService.checkIfErrorMessageCookieExist();
   }
 
 }
