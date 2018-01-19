@@ -65,6 +65,10 @@ export class ServerRequestService {
     );
   }
 
+  checkIfTokenExiper() {
+    return this.jwtHelper.isTokenExpired(this.checkCookieSeervice.getUserToken());
+  }
+
 
   /**
  * Handle Http operation that failed.

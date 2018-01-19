@@ -17,6 +17,7 @@ import { MessageService } from './services/message/message.service';
 import { CheckCookieService } from './services/check-cookie/check-cookie.service';
 import { ServerRequestService } from './services/server-request/server-request.service';
 import { AuthInterceptorService } from './services/auth-interceptor/auth-interceptor.service';
+import { AuthGuardService } from './services/auth-guard/auth-guard.service';
 
 @NgModule({
   declarations: [
@@ -44,7 +45,8 @@ import { AuthInterceptorService } from './services/auth-interceptor/auth-interce
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptorService,
       multi: true
-    }
+    },
+    AuthInterceptorService
   ],
 
   bootstrap: [

@@ -97,7 +97,6 @@ exports.login_user = (req, res, next) => {
                 }
                 res.clearCookie('errorMessage');
                 res.cookie('userToken', token);
-                res.cookie('user_ID', user[0]._id);
                 res.redirect('http://localhost:4200/dashboard');
             } else {
                 res.cookie('errorMessage', "Username o Password sbagliata!");
