@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {User} from '../user';
+import { ServerRequestService } from '../services/server-request/server-request.service';
+import { CheckCookieService } from '../services/check-cookie/check-cookie.service';
+import { log } from 'util';
 
 @Component({
   selector: 'app-user-profile',
@@ -8,10 +10,23 @@ import {User} from '../user';
 })
 export class UserProfileComponent implements OnInit {
 
-    //user: User;
-  constructor() { }
+  user: any;
+
+  constructor(
+    private serverRequestService: ServerRequestService,
+    private cookie: CheckCookieService
+  ) { }
 
   ngOnInit() {
+    this.getUserInformation();
+  }
+
+  getUserInformation() {
+    this.serverRequestService.getUser().subscribe(
+      user => {
+        this.user = user;
+      }
+    );
   }
 
 }

@@ -8,7 +8,8 @@ module.exports = (req, res, next) => {
         req.userData = decoded;
         next();
     } catch (error) {
-        res.cookie('errorMessage', error.name);
+        res.cookie('errorMessage', error);
+        res.redirect('http://localhost:4200/dashboard');
         //return errorHandling.errorType(401, res);
     }
 };
