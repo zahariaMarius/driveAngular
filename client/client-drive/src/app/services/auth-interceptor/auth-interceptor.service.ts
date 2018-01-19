@@ -19,8 +19,8 @@ export class AuthInterceptorService implements HttpInterceptor {
 
     const userToken = this.checkCookieService.getUserToken();
 
- 
-    const authReq = req.clone({ headers: req.headers.set( 'Content-Type' , 'application/x-www-form-urlencoded; charset=UTF-8' )});
+    // tslint:disable-next-line:max-line-length
+    const authReq = req.clone({ headers: req.headers.set('Authorization' , 'Bearer ' + userToken)});
 
     console.log('Sending request with new header now ...');
     console.log(authReq.headers);
