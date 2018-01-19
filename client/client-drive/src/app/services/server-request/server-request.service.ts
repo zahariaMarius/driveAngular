@@ -65,7 +65,8 @@ export class ServerRequestService {
     );
   }
 
-  checkIfTokenExiper() {
+  checkIfTokenExipered() {
+    console.log(this.jwtHelper.isTokenExpired(this.checkCookieSeervice.getUserToken()));
     return this.jwtHelper.isTokenExpired(this.checkCookieSeervice.getUserToken());
   }
 
