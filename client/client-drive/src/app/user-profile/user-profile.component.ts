@@ -11,22 +11,20 @@ import { AfterViewInit, ElementRef} from '@angular/core';
 })
 export class UserProfileComponent implements OnInit {
 
-   user: any;
-   showSelected : boolean;
-   showEdit: boolean;
+  user: any;
+  body = {
+    'name': 'Angular'
+  };
 
   constructor(
     private serverRequestService: ServerRequestService,
-    private cookie: CheckCookieService,
-    private elementRef:ElementRef
-  ) {
-      this.showSelected = false;
-      this.showEdit = true;
- }
-
+    private checkCookieService: CheckCookieService
+  ) { }
 
   ngOnInit() {
+    //this.getUserInformation();
     this.getUserInformation();
+    this.showErrorMessage();
   }
 
   ngAfterViewInit() {
@@ -51,6 +49,18 @@ saveData(name: string, surname: string, email: string, password: string){
         this.user = user;
       }
     );
+  }
+
+  updateUserProfile() {
+    this.serverRequestService.updateUser(this.body).subscribe(
+      response => {
+        console.log(response);
+      }
+    );
+  }
+
+  showErrorMessage() {
+    this.checkCookieService.checkIfErrorMessageCookieExist();
   }
 
 }

@@ -80,8 +80,9 @@ app.use(bodyParser.json());
      res.header('X-Powered-By', 'Node.js, Express, MongoDB, Mongoose');
      res.header('X-Version', '1.0.5');
      if (req.method === 'OPTIONS') {
-         res.header('Access-Control-Allow-Methods', 'PUT, POST, PATCH, DELETE, GET');
-         return res.status(200).json({});
+        res.header('Access-Control-Allow-Headers', '*');
+        res.header('Access-Control-Allow-Methods', 'PUT, POST, PATCH, DELETE, GET');
+        return res.status(200).json({});
    }
    next();
  });
