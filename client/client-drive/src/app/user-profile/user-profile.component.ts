@@ -11,15 +11,22 @@ import { AfterViewInit, ElementRef} from '@angular/core';
 })
 export class UserProfileComponent implements OnInit {
 
-  user: any;
-  body = {
-    'name': 'Angular'
-  };
+    showSelected : boolean;
+    showEdit: boolean;
+    user: any;
+    body: {};
 
   constructor(
     private serverRequestService: ServerRequestService,
-    private checkCookieService: CheckCookieService
-  ) { }
+    private checkCookieService: CheckCookieService,
+    private elementRef:ElementRef
+  ) {
+      this.showSelected = false;
+      this.showEdit = true;
+ }
+
+
+
 
   ngOnInit() {
     //this.getUserInformation();
@@ -38,8 +45,22 @@ onClick(event) {
    this.showEdit = false;
 }
 
-saveData(name: string, surname: string, email: string, password: string){
+saveData(Name: string, Surname: string, Email: string, Password: string){
 
+      this.body = {
+      'name': Name,
+      'surname': Surname,
+      'email': Email,
+      'password': Password
+      };
+
+      this.updateUserProfile(this.body);
+      this.getUserInformation();
+
+      this.showSelected = false;
+      this.showEdit = true;
+
+       window.location.reload();
 
 }
 
@@ -51,7 +72,7 @@ saveData(name: string, surname: string, email: string, password: string){
     );
   }
 
-  updateUserProfile() {
+  updateUserProfile(body) {
     this.serverRequestService.updateUser(this.body).subscribe(
       response => {
         console.log(response);
