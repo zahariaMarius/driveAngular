@@ -21,17 +21,30 @@ li a {
 li a:hover {
     background-color: #111111;
 }
-.profilo {
-    background-image: './images/user.png';*/
-    background-repeat: no-repeat;
-    background-position: 50% 10px;
+nav{
+    margin: auto;
+    padding: 10px;
+    margin-left: 550px;;
+}
+nav a {
+  padding: 5px 10px;
+  text-decoration: none;
+  margin-top: 10px;
+  display: inline-block;
+  background-color: #eee;
+  border-radius: 4px;
+}
+nav a:visited, a:link {
+  color: #607D8B;
+}
+nav a:hover {
+  color: #039be5;
+  background-color: #CFD8DC;
+}
+nav a.active {
+  color: #039be5;
 }
 
-.drive {
-    background-image: './images/upload.png';*/
-    background-repeat: no-repeat;
-    background-position: 50% 10px;
-}
 
 * {
     box-sizing: border-box;
@@ -59,10 +72,14 @@ input[type=submit] {
     border-radius: 4px;
     cursor: pointer;
     float: right;
+    margin-bottom: 10px;
 }
 
 input[type=submit]:hover {
     background-color: #45a049;
+}
+.saveDate {
+    display: none;
 }
 
 .container {
