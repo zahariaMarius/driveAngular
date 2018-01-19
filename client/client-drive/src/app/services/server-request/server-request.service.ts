@@ -1,19 +1,31 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { DomSanitizer, SafeResourceUrl, SafeUrl } from '@angular/platform-browser';
+import { JwtHelper } from 'angular2-jwt';
 
 import { MessageService } from '../message/message.service';
+import { CookieService } from 'ngx-cookie-service';
+import { CheckCookieService } from '../check-cookie/check-cookie.service';
+
 import { Observable } from 'rxjs/Observable';
 import { of } from 'rxjs/observable/of';
 import { catchError, map, tap } from 'rxjs/operators';
 
+interface UserResponse {
+  response: object;
+}
+
 @Injectable()
 export class ServerRequestService {
+
+  jwtHelper: JwtHelper  = new JwtHelper();
 
   constructor(
     private http: HttpClient,
     private sanitizer: DomSanitizer,
-    private messageService: MessageService
+    private messageService: MessageService,
+    private cookieService: CookieService,
+    private checkCookieSeervice: CheckCookieService
   ) { }
 
   sanitizerView(view) {
@@ -28,6 +40,18 @@ export class ServerRequestService {
           }),
           catchError(this.handleError('getIndexView', ''))
         );
+  }
+
+  getUser() {
+    const user_id = this.checkCookieSeervice.getUserId();
+    console.log(user_id);
+    return this.http.get('http://localhost:3000/user/' + user_id)
+    .pipe(
+      tap(user => {
+          console.log(user);
+        }),
+        catchError(this.handleError('getUser', ''))
+    );
   }
 
 
