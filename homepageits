@@ -1,0 +1,84 @@
+    <section id="home" name="home" class="row no-gutters">
+        <div class="col-xs-12">
+            <div class="hero">
+                <img class="logo" src="img/logo.png" alt="logo its">
+                <div class="welcome-box">
+                    <p class="welcome-text">WELCOME</p>
+                </div>
+                <div class="hero-box">
+                    <p class="hero-text">EXAM FOR <br>ITS FRONTEND</p>
+                </div>
+                <a href="#good"> <img class="scroll" src="img/scrollDown.png" alt="scroll Down"> </a>
+
+            </div>
+        </div>
+    </section>
+    
+    
+    /**
+        * Home hero - section
+        */
+        
+        .hero {
+            background-image: url(../img/home.png);
+            background-position: left top right;
+            background-repeat: no-repeat;
+            width: 1900px;
+            height: 952px;
+            position: relative;
+        }
+        
+        .hero .logo {
+            margin-top: 50px;
+            margin-left: 78px;
+        }
+        
+        .hero .welcome-box {
+            position: absolute;
+            width: 153.9px;
+            height: 88px;
+            top: 361px;
+            left: 467px;
+        }
+        
+        .hero .welcome-box .welcome-text {
+            font-family: Montserrat-Black;
+            font-size: 36px;
+            letter-spacing: -0.26px;
+            color: #f9c907;
+        }
+        
+        .hero .hero-box {
+            position: absolute;
+            width: 685.2px;
+            height: 261px;
+            top: 427px;
+            left: 467px;
+        }
+        
+        .hero .hero-box .hero-text {
+            font-family: Montserrat-Black;
+            font-size: 87px;
+            line-height: 87px;
+            letter-spacing: -0.62px;
+            color: #ffffff;
+        }
+        
+        .hero .scroll {
+            position: absolute;
+            bottom: 65.1px;
+            left: 941px;
+            cursor: pointer;
+        }
+        
+        
+        
+        
+        document.getElementById("home").scrollIntoView();
+
+function scrollIntoView(eleID) {
+    var e = document.getElementById(eleID);
+    if (!!e && e.scrollIntoView) {
+        e.scrollIntoView();
+    }
+}
