@@ -1,5 +1,3 @@
-# driveAngular
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -61,6 +59,60 @@
             </div>
         </div>
 
+        <section class="section-4">
+            <div class="row no-gutters">
+                <div class="col-2">
+                    <div class="title">
+                        <h1>THE TEAM</h1>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="text">
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut tempus dui gravida ligula malesuada lacinia. Pellentesque id justo a eros condimentum bibendum. Cras eget ipsum non nisl mattis feugiat eget vitae mauris.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="row no-gutters background">
+                <div class="col-3">
+                    <div class="subtitle">
+                        <h3>THE DESIGNER</h3>
+                        <div class="sub-background-1">
+                            <img src="res/img/rectangle_1/drawable-xxxhdpi/Rectangle 7 Copy 4.png" alt="designer image">
+                        </div>
+                        <h5>John Snow</h5>
+                    </div>
+                </div>
+                <div class="col-3">
+                    <div class="subtitle">
+                        <h3>THE DEVELOPER</h3>
+                        <div class="sub-background-2">
+                            <img src="res/img/rectangle_2/drawable-xxxhdpi/Rectangle 7 Copy 5.png" alt="developer image">
+                        </div>
+                        <h5>Princess Peach</h5>
+                    </div>
+                </div>
+                <div class="col-3">
+                    <div class="subtitle">
+                        <h3>THE PROJECT MANAGER</h3>
+                        <div class="sub-background-3">
+                            <img src="res/img/rectangle_3/drawable-xxxhdpi/Rectangle 7 Copy 6.png" alt="project manager image">
+                        </div>
+                        <h5>April O'Neil</h5>
+                    </div>
+                </div>
+                <div class="col-3">
+                    <div class="subtitle">
+                        <h3>THE ACCOUNT MANAGER</h3>
+                        <div class="sub-background-4">
+                            <img src="res/img/rectangle_4/drawable-xxxhdpi/Rectangle 7 Copy 7.png" alt="account manager image">
+                        </div>
+                        <h5>Licia Mitamura</h5>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
         <div class="footer">
             <div class="row no-gutters">
                 <div class="col-xl-6">
@@ -73,23 +125,51 @@
                             <img src="res/img/map-shape/drawable-mdpi/Map Shape.png" alt="map shape icon">
                             <p>EXPAND THE MAP</p>
                         </div>
-                        <div id="map"></div>
+                        <iframe id="map" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2817.223792558786!2d7.657510915963618!3d45.08125477909829!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47886daa596351dd%3A0xdd2bf86536f8d839!2sVia+Jacopo+Durandi%2C+10144+Torino+TO!5e0!3m2!1sit!2sit!4v1531226357405"
+                            width="540" height="250" frameborder="0" style="border:0" allowfullscreen></iframe>
                     </div>
                 </div>
                 <div class="col-xl-6">
                     <div class="contact-form">
-                        <form>
-                            <input id="name-input" type="text" placeholder="Your name">
-                            <input id="email-input" type="email" placeholder="Your email">
-                            <input id="number-input" type="tel" placeholder="Phone number">
-                            <input id="message-input" type="text" placeholder="Message">
+                        <form class="needs-validation" id="subscription-form" novalidate>
+                            <div class="input-group">
+                                <input id="name-input" class="form-control" type="text" placeholder="Your name" required>
+                                <span class="invalid-feedback">Name is required.</span>
+                            </div>
+                            <div class="input-group">
+                                <input id="email-input" class="form-control" type="email" placeholder="Your email" required>
+                                <span class="invalid-feedback">Email not valid.</span>
+                            </div>
+                            <div class="input-group">
+                                <input id="number-input" class="form-control" type="tel" placeholder="Phone number" minlength="10" maxlength="10" pattern="\d*" required>
+                                <span class="invalid-feedback">Phone number not valid.</span>
+                            </div>
+                            <div class="input-group">
+                                <textarea id="message-input" class="form-control" type="text" placeholder="Message" required></textarea>
+                                <span class="invalid-feedback">Message is required.</span>
+                            </div>
                             <button type="submit">SEND IT</button>
                         </form>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
 
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                    <h1>Thank you for the subscription</h1>
+                </div>
+            </div>
+        </div>
     </div>
 
 
@@ -97,7 +177,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
     <script src="js/script.js"></script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBu-916DdpKAjTmJNIgngS6HL_kDIKU0aU&callback=myMap"></script>
 </body>
 
 </html>
@@ -106,7 +185,12 @@
 
 
 
-css 
+
+
+
+
+
+css
 
 
 
@@ -252,8 +336,126 @@ css
     width: 673px;
 }
 
+
+/* team - start */
+
+.section-4 {
+    padding-top: 290px;
+}
+
+.section-4 .title {
+    width: 265px;
+    height: 164px;
+    padding-left: 174px;
+}
+
+.section-4 h1 {
+    font-family: montserrat-black;
+    color: #f35564;
+    font-size: 86.4px;
+    line-height: 87px;
+    letter-spacing: -0.62px;
+}
+
+.section-4 .text {
+    width: 673px;
+    height: 100%;
+    margin-left: 200px;
+    padding-top: 2%;
+}
+
+.section-4 p {
+    font-family: helvetica-neue;
+    color: #798293;
+    font-size: 23.4px;
+    line-height: 32px;
+    letter-spacing: 0.17px;
+    font-weight: bold;
+}
+
+.section-4 .background {
+    margin-top: 48px;
+    background-color: #5b37b2;
+    width: 1762px;
+    height: 886px;
+    ;
+    margin-left: 141px;
+}
+
+.section-4 .subtitle {
+    width: 159px;
+    height: 68px;
+    padding-top: 186px;
+    padding-left: 48px;
+}
+
+.section-4 h3 {
+    font-family: montserrat-black;
+    color: #ffffff;
+    font-size: 29.4px;
+    line-height: 34px;
+    letter-spacing: -0.21px;
+    padding-bottom: 30px;
+    width: 307px;
+    height: 55px;
+    margin-bottom: 30px;
+}
+
+.section-4 h5 {
+    font-family: montserrat-black;
+    color: #ffffff;
+    width: 124px;
+    height: 17px;
+    margin-left: 169px;
+    margin-top: 20%;
+}
+
+.section-4 .sub-background-1 {
+    background-color: #f9c907;
+    width: 374px;
+    height: 383px;
+    margin-left: -90px;
+    position: relative;
+}
+
+.section-4 .sub-background-2 {
+    background-color: #f35564;
+    width: 374px;
+    height: 383px;
+    margin-left: -90px;
+    position: relative;
+}
+
+.section-4 .sub-background-3 {
+    background-color: #48c074;
+    width: 374px;
+    height: 383px;
+    margin-left: -90px;
+    position: relative;
+}
+
+.section-4 .sub-background-4 {
+    background-color: #e64f21;
+    width: 374px;
+    height: 383px;
+    margin-left: -90px;
+    position: relative;
+}
+
+.section-4 img {
+    position: absolute;
+    top: -2%;
+    left: 3%;
+    width: 374px;
+    height: 383px;
+}
+
+
+/* team - end */
+
 .footer {
     margin-top: 229px;
+    margin-bottom: 544px;
 }
 
 .footer .content-text {
@@ -316,24 +518,77 @@ css
 .footer .contact-form form input {
     width: 100%;
     height: 71px;
+    border: solid 3px #e7e7e7;
+    font-family: helvetica-neue;
+    padding-left: 37px;
 }
 
-.footer .contact-form form input:nth-child(odd) {
+.footer .contact-form form textarea {
+    width: 100%;
+    height: 71px;
+    border: solid 3px #e7e7e7;
+    font-family: helvetica-neue;
+    padding-left: 37px;
+}
+
+.footer .contact-form form .input-group:nth-child(odd) {
     margin-bottom: 26px;
 }
 
-.footer .contact-form form #email-input {
+.footer .contact-form form .input-group:nth-child(even) {
     margin-bottom: 24px;
 }
 
 .footer .contact-form form #message-input {
-    margin-bottom: 20px;
+    height: 195px;
+    padding-top: 24px;
 }
 
 .footer .contact-form form button[type=submit] {
     float: right;
     width: 301px;
     height: 71px;
+    border: 0px;
+    font-family: montserrat-black;
     font-size: 28.4px;
+    letter-spacing: -0.2px;
+    background-color: #7a4ee5;
+    color: white;
 }
 
+
+
+
+
+
+
+
+
+
+
+
+js
+
+
+
+(function() {
+    'use strict';
+    window.addEventListener('load', function() {
+        var forms = document.getElementsByClassName('needs-validation');
+        var validation = Array.prototype.filter.call(forms, function(form) {
+            form.addEventListener('submit', function(event) {
+                if (form.checkValidity() === false) {
+                    event.preventDefault();
+                    event.stopPropagation();
+                } else {
+                    $('#exampleModal').modal('show');
+                }
+                form.classList.add('was-validated');
+            }, false);
+        });
+    }, false);
+})();
+
+$("#subscription-form").submit(function(e) {
+    e.preventDefault();
+});
