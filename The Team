@@ -1,0 +1,158 @@
+ <section class="theteam">
+            <div class="row no-gutters">
+                <div class="col-2">
+                    <div class="title">
+                        <h1>THE TEAM</h1>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="text">
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut tempus dui gravida ligula malesuada lacinia. Pellentesque id justo a eros condimentum bibendum. 
+                            Cras eget ipsum non nisl mattis feugiat eget vitae mauris.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="row no-gutters background">
+                <div class="col-3">
+                    <div class="mini-title">
+                        <h3>THE DESIGNER</h3>
+                        <div class="mini-background">
+                            <img src="Img/the-designer/the-designer.png">
+                        </div>
+                        <h5>John Snow</h5>
+                    </div>
+                </div>
+                <div class="col-3">
+                    <div class="mini-title">
+                        <h3>THE DEVELOPER</h3>
+                        <div class="mini-background2">
+                            <img src="Img/the-designer/the-developer.png">
+                        </div>
+                        <h5>Princess Peach</h5>
+                    </div>
+                </div>
+                <div class="col-3">
+                    <div class="mini-title">
+                        <h3>THE PROJECT MANAGER</h3>
+                        <div class="mini-background3">
+                            <img src="Img/the-designer/the-project-manager.png">
+                        </div>
+                        <h5>April O'Neil</h5>
+                    </div>
+                </div>
+                <div class="col-3">
+                    <div class="mini-title">
+                        <h3>THE ACCOUNT MANAGER</h3>
+                        <div class="mini-background4">
+                            <img src="Img/the-designer/the-account-manager.png">
+                        </div>
+                        <h5>Licia Mitamura</h5>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+        
+        
+        
+        
+        ////CSS
+        
+        .theteam{
+    padding-top: 290px;
+}
+.theteam .title{
+    width: 265px;
+    height: 164px;
+    padding-left: 174px;
+}
+.theteam h1{
+    font-family: Montserrat-black;
+    color: #f35564;
+    font-size: 86.4px;
+    line-height: 87px;
+    letter-spacing: -0.62px;
+}
+.theteam .text{
+    width: 673px;
+    height: 100%;
+    margin-left: 200px;
+    padding-top: 2%;
+}
+.theteam p{
+    font-family: HelveticaNeue;
+    color: #798293;
+    font-size: 23.4px;
+    line-height: 32px;
+    letter-spacing: 0.17px;
+    font-weight: bold;
+}
+.theteam .background{
+    margin-top: 48px;
+    background-color: #5b37b2;
+    width: 1762px;
+    height: 886px;;
+    margin-left:141px;
+}
+.theteam .mini-title{
+    width: 159px;
+    height: 68px;
+    padding-top: 186px;
+    padding-left:48px;
+    
+}
+.theteam h3{
+    font-family: Montserrat-black;
+    color: #ffffff;
+    font-size: 29.4px;
+    line-height: 34px;
+    letter-spacing: -0.21px;
+    padding-bottom:30px;
+    width: 307px;
+    height: 55px;
+    margin-bottom: 30px;
+}
+.theteam h5{
+    font-family: Montserrat-black;
+    color: #ffffff;
+    width: 124px;
+    height: 17px;
+    margin-left: 169px;
+    margin-top: 20%;
+}
+.theteam .mini-background{
+    background-color: #f9c907;
+    width: 374px;
+    height: 383px;
+    margin-left: -90px;
+    position: relative;
+}
+.theteam .mini-background2{
+    background-color: #f35564;
+    width: 374px;
+    height: 383px;
+    margin-left: -90px;
+    position: relative;
+}
+.theteam .mini-background3{
+    background-color: #48c074;
+    width: 374px;
+    height: 383px;
+    margin-left: -90px;
+    position: relative;
+}
+.theteam .mini-background4{
+    background-color: #e64f21;
+    width: 374px;
+    height: 383px;
+    margin-left: -90px;
+    position: relative;
+}
+.theteam img{
+    position: absolute;
+    top: -2%;
+    left: 3%;
+    width: 374px;
+    height: 383px;
+
+}
